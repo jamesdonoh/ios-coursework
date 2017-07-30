@@ -1,15 +1,131 @@
 ---
 references:
 - id: bbc2017
-  title: 'The moped and scooter crime wave that has swept London - BBC News'
+  title: 'The moped and scooter crime wave that has swept London'
   author:
-  - literal: BBC News
-  given: Jason
+  - literal: BBC
   type: webpage
   URL: http://www.bbc.co.uk/news/uk-40731485
   issued: 2017
   accessed:
-  date-parts:
-  - 2017
-  - 07
-  - 29
+    date-parts:
+    - - 2017
+      - 07
+      - 29
+- id: citypolice
+  title: 'Motorcycle Theft is on the Increase'
+  author:
+  - literal: City of London Police
+  type: webpage
+  URL: https://www.cityoflondon.police.uk/news-and-appeals/Documents/Motorcycle%20Theft%20leaflet.pdf
+  issued: 2016
+  accessed:
+    date-parts:
+    - - 2017
+      - 07
+      - 29
+- id: biketrac
+  title: 'How much does BikeTrac cost?'
+  author:
+  - literal: BikeTrac
+  type: webpage
+  URL: https://biketrac.co.uk/#pricing
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 07
+      - 29
+- id: ibeacon
+  title: 'Getting Started with iBeacon'
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/ibeacon/Getting-Started-with-iBeacon.pdf
+  issued: 2014
+  accessed:
+    date-parts:
+    - - 2017
+      - 07
+      - 29
+- id: appstore
+  title: 'App Store'
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/support/app-store/
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 07
+      - 29
+- id: reenskaug
+  title: MVC - Xerox PARC 1978-79
+  author:
+  - family: Reenskaug
+    given: Trygve
+  type: webpage
+  URL: http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html
+  issued: 2012
+  accessed:
+    date-parts:
+    - - 2017
+      - 07
+      - 29
+- id: freeman
+  title: Pro Design Patterns in Swift
+  author:
+  - family: Freeman
+    given: Adam
+  type: book
+  issued: 2015
+  publisher: Apress
+  publisher-place: New York, NY
+- id: applemvc
+  title: 'Concepts in Objective-C Programming: Model-View-Controller'
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/library/content/documentation/General/Conceptual/CocoaEncyclopedia/Model-View-Controller/Model-View-Controller.html
+  issued: 2012
+  accessed:
+    date-parts:
+    - - 2017
+      - 07
+      - 29
+- id: gangoffour
+  title: 'Design Patterns: Elements of Reusable Object-Oriented Software'
+  author:
+  - family: Gamma
+    given: Erich
+  - family: Helm
+    given: Richard
+  - family: Johnson
+    given: Ralph
+  - family: Vlissides
+    given: John
+  type: book
+  issued: 1994
+  publisher: Addison-Wesley
+  publisher-place: Upper Saddle River, NJ
+- id: wysocki
+  title: 'Effective Project Management: Traditional, Agile, Extreme'
+  author:
+  - family: Wysocki
+    given: Robert K.
+  type: book
+  issued: 2014
+  publisher: John Wiley & Sons
+  publisher-place: Indianaopolis, IN
+  edition: Seventh edition
+- id: prince2
+  title: 'Brilliant PRINCE2'
+  author:
+  - family: Barker
+    given: Stephen
+  type: book
+  issued: 2013
+  publisher: Pearson International
+  publisher-place: Harlow, England
+...

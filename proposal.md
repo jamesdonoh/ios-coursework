@@ -11,9 +11,9 @@ This proposal is for an iOS mobile application ('app') which enables owners of m
 
 ## Context
 
-Thefts of motorcycles and scooters are growing sharply. Nearly 15,000 bikes were stolen in the year 2016-7 in London alone \cite{bbc2017}, an increase of 30% on the previous year. Owners may fit a GPS tracker which can be used to report the vehicle's location to a central service (e.g. [2]) and therefore recover it if stolen, however prices for these devices start at £300 and usually also entail a monthly subscription charge, making them not affordable for many riders.
+Thefts of motorcycles and scooters are growing sharply. Nearly 15,000 bikes were stolen in the year 2016-7 in London alone [@bbc2017], an increase of 30% on the previous year. As a recovery measure, owners are advised by authorities to apply ultraviolet markings [@citypolice]. Another option is a GPS tracker which can be used to report the vehicle's location to a central service and therefore recover it if stolen, however prices for these devices start at £300 [@biketrac] and usually also entail a monthly subscription charge, making them not affordable for many riders.
 
-iBeacon is a Bluetooth Low Energy (BLE) technology developed by Apple that enables iOS apps to recognise when they have entered or left the physical region around a compatible device that is generating iBeacon advertisements [4]. In contrast to GPS trackers, iBeacons can be as cheap as £5 and may have longer battery life [?].
+iBeacon is a Bluetooth Low Energy (BLE) technology developed by Apple that enables iOS apps to recognise when they have entered or left the physical region around a compatible device that is generating iBeacon advertisements [@ibeacon]. In contrast to GPS trackers, iBeacons can be as cheap as £5 and may have longer battery life.
 
 ## Proposal - 'FindMyBike'
 
@@ -36,7 +36,7 @@ The sequence of app usage can be summarised as:
 
 ## Target user group
 
-The target market for this app are motorcycle and scooter owners living in densely populated urban areas with a known motorcycle crime problem such as central London. Users will be required to own devices running iOS 10 or later (representing 86% of the iOS device market [3]) in order to balance availability of the latest APIs and maximise the potential installed user base.
+The target market for this app are motorcycle and scooter owners living in densely populated urban areas with a known motorcycle crime problem such as central London. Users will be required to own devices running iOS 10 or later (representing 86% of the iOS device market [@appstore] in order to balance availability of the latest APIs and maximise the potential installed user base.
 
 ## Platform
 
@@ -80,11 +80,11 @@ Figure \ref{design-blueprint} shows the main app views.
 
 ## Model-View-Controller
 
-The envisaged architectural pattern for the app is Model-View-Controller (MVC). MVC was formulated by Trygve Reenskaug [8] in 1978 and later developed by others Xeroc PARC, and has since been applied to a wide range of application platforms. Freeman [9] states that one aim of MVC is to 'simplify development, testing and maintenance'. Indeed, Apple's developer documentation [7] indicates that core iOS platform technologies often assume custom app objects will conform to the MVC pattern.
+The envisaged architectural pattern for the app is Model-View-Controller (MVC). MVC was formulated by Trygve Reenskaug in 1978 and later developed by others at Xeroc PARC [@reenskaug], and has since been applied to a wide range of application platforms. Freeman [-@freeman] states that one aim of MVC is to 'simplify development, testing and maintenance'. Indeed, Apple's developer documentation [@applemvc] indicates that core iOS platform technologies often assume custom app objects will conform to the MVC pattern.
 
-MVC can be seen as a layered model in which different applications concerns are separated. The model is an abstract representation of some data relevant to the application (for example, the registration details of a vehicle) along with operations for manipulating it, while the view corresponds to one or more user interface components that display data to the user. This implies that multiple views may be attached to the same model. The controller acts as intermediary between these layers and 'defines the way the user interface reacts to user input' [10]. By decoupling data and presentation, the resulting app code can be more reusable and extensible [7].
+MVC can be seen as a layered model in which different applications concerns are separated. The model is an abstract representation of some data relevant to the application (for example, the registration details of a vehicle) along with operations for manipulating it, while the view corresponds to one or more user interface components that display data to the user. This implies that multiple views may be attached to the same model. The controller acts as intermediary between these layers and 'defines the way the user interface reacts to user input' [@gangoffour]. By decoupling data and presentation, the resulting app code can be more reusable and extensible [@applemvc].
 
-One possible variation on the pattern is to also define a 'view model', which may be defined as a restricted or modified set of model data that is used by the view [9], but this additional separation is unlikely to be necessary for the relatively simple data used by the proposed app.
+One possible variation on the pattern is to also define a 'view model', which may be defined as a restricted or modified set of model data that is used by the view [@freeman], but this additional separation is unlikely to be necessary for the relatively simple data used by the proposed app.
 
 ## Development approach
 
@@ -95,7 +95,7 @@ As some parts of the solution are not yet fully defined, an iterative method is 
 - The designer/developer also acts as the primary 'client' of the project (with the University as a secondary client)
 - Changes in scope/approach are possible but will be be determined solely by the designer/developer
 
-Iterative project management models are well suited to learning and discovery, where a solution is known but not to the required depth, and some scope changes are expected [12]. Although for some projects the need for a very involved client is a challenge, this problem does not apply here.
+Iterative project management models are well suited to learning and discovery, where a solution is known but not to the required depth, and some scope changes are expected [@wysocki]. Although for some projects the need for a very involved client is a challenge, this problem does not apply here.
 
 # Development timeline
 
@@ -103,9 +103,9 @@ Figure \ref{development-timeline} is a simplified Gantt chart shows the design a
 
 ![Development timeline Gantt chart\label{development-timeline}](development-timeline.pdf)
 
-## Risk register
+## Risk register
 
-A number of possible risks for this project have been identified, which are given below in the form of a simplified risk register in the style of PRINCE2. The objective of such a register is "to identify, assess and control uncertainty and, as a result, improve the ability of the project to succeed" [11]
+A number of possible risks for this project have been identified, which are given below in the form of a simplified risk register in the style of PRINCE2. The objective of such a register is "to identify, assess and control uncertainty and, as a result, improve the ability of the project to succeed" [@prince2].
 
 ----------------------------------------------------------------------------------------------
 ID  Description                                           Probability    Impact  Level of Risk
@@ -116,7 +116,7 @@ ID  Description                                           Probability    Impact 
  2  Insufficient users install the app after release to   Possible       High    High
     provide necessary level of coverage
 
- 3  Lack of Bluetooth support in iOS Simulator [6] slows  Probable       Low     Medium
+ 3  Lack of Bluetooth support in iOS Simulator slows      Probable       Low     Medium
     down development by requiring use of real physical
     devices for testing
 
@@ -130,24 +130,3 @@ Based on the risks above, the following mitigrations are proposed:
 - ...
 
 # References
-
-- [1] Motorcycle Theft leaflet, City of London Police
-  https://www.cityoflondon.police.uk/news-and-appeals/Documents/Motorcycle%20Theft%20leaflet.pdf
-- [2] BikeTrac Pricing
-  https://biketrac.co.uk/#pricing
-- [3] Apple Developer - App Store
-  https://developer.apple.com/support/app-store/
-- [4] Apple Developer - Getting Started with iBeacon
-  https://developer.apple.com/ibeacon/Getting-Started-with-iBeacon.pdf
-- [6] iOS Simulator Bluetooth Low Energy (BLE) - comment by Apple Staff member 'jeremyhu'
-  https://forums.developer.apple.com/thread/14983
-- [7] Concepts in Objective-C Programming: Model-View-Controller
-  https://developer.apple.com/library/content/documentation/General/Conceptual/CocoaEncyclopedia/Model-View-Controller/Model-View-Controller.html#//apple_ref/doc/uid/TP40010810-CH14-SW1
-- [8] MVC Xerox PARC 1978-9
-  http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html
-- [9] Pro Design Patterns in Swift - Adam Freeman (2015), Apress, New York
-- [10] (gang of four)
-- [11] Brilliant PRINCE2: What you really need to know about PRINCE2
-  Stephen Barker, 2013, Harlow, Pearson
-- [12] Effective Project Management: Traditional, Agile, Extreme, 7th Edition
-  Robert K. Wysocki. John Wiley & Sons, 2013
