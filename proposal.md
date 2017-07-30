@@ -7,13 +7,13 @@ author: James Donohue - <james.donohue@bbc.co.uk>
 
 ## Overview
 
-This proposal is for an iOS mobile application ('app') which enables owners of motorcycles and scooters 'crowdsource' the location of their vehicle in the event of them going missing using a combination of Bluetooth Low Energy (BLE) beacons and the Global Positioning System (GPS).
+This proposal is for an iOS mobile application ('app') which enables owners of motorcycles and scooters to 'crowdsource' the location of their vehicle in the event of it going missing using a combination of Bluetooth Low Energy (BLE) beacons and the Global Positioning System (GPS).
 
 ## Context
 
 Thefts of motorcycles and scooters are growing sharply. Nearly 15,000 bikes were stolen in the year 2016-7 in London alone [@bbc2017], an increase of 30% on the previous year. As a recovery measure, owners are advised by authorities to apply ultraviolet markings [@citypolice]. Another option is a GPS tracker which can be used to report the vehicle's location to a central service and therefore recover it if stolen, however prices for these devices start at £300 [@biketrac] and usually also entail a monthly subscription charge, making them not affordable for many riders.
 
-iBeacon is a Bluetooth Low Energy (BLE) technology developed by Apple that enables iOS apps to recognise when they have entered or left the physical region around a compatible device that is generating iBeacon advertisements [@ibeacon]. In contrast to GPS trackers, iBeacons can be as cheap as £5 and may have longer battery life.
+iBeacon is a Bluetooth Low Energy (BLE) technology developed by Apple that enables iOS apps to recognise when they have entered or left the physical region around a compatible device that is generating iBeacon advertisements [@ibeacon]. In contrast to GPS trackers, iBeacons are a low-cost solution and require no subscription.
 
 ## Proposal - 'FindMyBike'
 
@@ -21,11 +21,9 @@ When physically attached to a motorcycles/scooter and associated with details of
 
 If a sufficiently large number of iOS app users are present in a densely populated area such as central London, the chances of detecting an iBeacon attached to a missing vehicle becomes high enough to make it a cost-effective alternative to GPS trackers by 'crowdsourcing' the absolute location of the missing vehicle.
 
-Figure \ref{solution-overview} describes the desired behaviour of the proposed application.
-
 ![Overview of solution\label{solution-overview}](solution-overview.pdf){ width=80% }
 
-The sequence of app usage can be summarised as:
+Figure \ref{solution-overview} describes the desired behaviour of the proposed application. The sequence of app usage can be summarised as:
 
 1. The user installs the FindMyBike app on their iPhone
 2. The user attaches a compatible iBeacon device to their bike and registers its identifier with the app
@@ -36,15 +34,20 @@ The sequence of app usage can be summarised as:
 
 ## Target user group
 
-The target market for this app are motorcycle and scooter owners living in densely populated urban areas with a known motorcycle crime problem such as central London. Users will be required to own devices running iOS 10 or later (representing 86% of the iOS device market [@appstore] in order to balance availability of the latest APIs and maximise the potential installed user base.
+The target market for this app are motorcycle and scooter owners living in densely populated urban areas with a known motorcycle crime problem such as central London. Users will be required to own devices running iOS 10 or later (representing 86% of the iOS device market [@appstore] in order to balance availability of the latest APIs with the maximum potential installed user base.
 
-## Platform
+## Platform and technologies
 
 The initial target platform for development is iPhone 6 and later. The report will also explore the possibility of adapting the app for Apple Watch.
 
-## Language
+All iOS code for the project will be written using Swift 3.1, to give an opportunity to explore and reflect upon recent trends in the Apple ecosystem.
 
-All iOS code for this project will be written using Swift 3.1, to give an opportunity to explore and reflect upon the most recent trends in the Apple ecosystem.
+The app will explore iOS architectural features including but not limited to
+
+- Core Location framework
+- User Notifications framework
+- UIKit framework
+- Foundation framework
 
 ## Server component
 
@@ -64,7 +67,7 @@ The success of the project will be measured in a number of ways:
 - compatibility with target platform and devices
 - demonstration that the app would meet Apple's criteria for inclusion on the App Store
 
-Following inclusion on the App Store, the following criteria may be considered when considering how effective the app is:
+Following inclusion on the App Store, the following criteria should be considered when considering how effective the app is:
 
 - number of download on the App Store
 - number of owners who have registered their bikes the app
@@ -72,9 +75,11 @@ Following inclusion on the App Store, the following criteria may be considered w
 
 # Blueprint
 
-Figure \ref{design-blueprint} shows the main app views.
+Figure \ref{design-blueprint} shows a partial design blueprint in the form of UI mockups of two key scenarios in the usage of the app.
 
-![Design blueprints\label{design-blueprint}](design-blueprint.pdf)
+![Design blueprints showing scanning mode (top) and location of missing bike (bottom)\label{design-blueprint}](design-blueprint.pdf)
+
+In the top scenario, a normal user is able to update their bike details and also view information about iBeacons in range that are attached to bikes which have been reported missing by other users. In the bottom scenario, the owner of a missing bike receives a 'push' (remote) notification from the server that their bike has been located. Upon opening the app they see the precise location submitted by the first user.
 
 # Design and development pattern
 
@@ -88,20 +93,24 @@ One possible variation on the pattern is to also define a 'view model', which ma
 
 ## Development approach
 
-As some parts of the solution are not yet fully defined, an iterative method is proposed. This is, based on the following assumptions:
+As some parts of the solution are not yet fully defined, an iterative development method is proposed. Iterative development implies a process of evolutionary advancement as opposed to a sequential, document-based one [@larman]. It also entails a _production prototype_ that 'evolves as the project team learns more about the solution' [@wysocki].
+
+The selection of this method is based on the following assumptions:
 
 - There is a single designer/developer working on the project
 - There will be no change in team members during the project
 - The designer/developer also acts as the primary 'client' of the project (with the University as a secondary client)
 - Changes in scope/approach are possible but will be be determined solely by the designer/developer
 
-Iterative project management models are well suited to learning and discovery, where a solution is known but not to the required depth, and some scope changes are expected [@wysocki]. Although for some projects the need for a very involved client is a challenge, this problem does not apply here.
+Iterative project management models are well suited to learning and discovery, where a solution is known but not to the required depth, and some scope changes are expected [@wysocki]. Although for some projects the need for a very involved client is a challenge, this problem does not apply here. 
 
 # Development timeline
 
-Figure \ref{development-timeline} is a simplified Gantt chart shows the design and development plan for the project. Task owners are not specified as only a single designer/developer is involved.
+Figure \ref{development-timeline} is a simplified Gantt chart shows the design and development plan for the project. Although Gantt charts are normally associated with the 'waterfall' software development model, it is used here as a way of illustrating the phases of development, with each phase in the left column representing an incremental iteration.
 
 ![Development timeline Gantt chart\label{development-timeline}](development-timeline.pdf)
+
+Task owners are not specified as only a single designer/developer is involved.
 
 ## Risk register
 
@@ -120,13 +129,14 @@ ID  Description                                           Probability    Impact 
     down development by requiring use of real physical
     devices for testing
 
-  4 The app fails to comply with submission guidelines    Unlikely       High    Medium
+ 4  The app fails to comply with submission guidelines    Unlikely       High    Medium
     for the App store
 ----------------------------------------------------------------------------------------------
 
-Based on the risks above, the following mitigrations are proposed:
+Based on the risks above, the following mitigation strategies are suggested:
 
 - Early study of app store submission guidelines and ongoing review [4]
-- ...
+- Testing with a range of different compatible mobile devices and iBeacons [1, 3]
+- Development of a thorough marketing strategy to maximise downloads [2]
 
 # References
