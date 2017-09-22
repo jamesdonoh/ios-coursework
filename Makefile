@@ -1,9 +1,10 @@
-default: proposal.pdf
+documents = report.pdf proposal.pdf
+default: $(documents)
 
-proposal.pdf: proposal.md bibliography.yaml
+%.pdf: %.md %-bibliography.yaml
 	pandoc --filter pandoc-citeproc \
 		--csl harvard-greenwich.csl \
-		--bibliography=bibliography.yaml \
+		--bibliography=$*-bibliography.yaml \
 		--latex-engine=xelatex \
 		-V geometry:a4paper \
 		-V mainfont=Constantia \
@@ -11,4 +12,4 @@ proposal.pdf: proposal.md bibliography.yaml
 		-s -o $@ $<
 
 clean:
-	rm -f proposal.{html,pdf}
+	rm -f ${documents}
