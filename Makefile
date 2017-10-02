@@ -9,6 +9,8 @@ default: $(documents)
 		-V geometry:a4paper \
 		-V mainfont=Constantia \
 		-V colorlinks \
+		--number-sections \
+		--toc \
 		-s -o $@ $<
 
 clean:

@@ -15,4 +15,101 @@ references:
   issued: 1994
   publisher: Addison-Wesley
   publisher-place: Upper Saddle River, NJ
+- id: hig
+  title: 'Human Interface Guidelines: iOS Design Themes'
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/ios/human-interface-guidelines/overview/themes/
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 09
+      - 22
+- id: textprogramming
+  title: 'Text Programming Guide for iOS: Using Text Kit to Draw and Manage Text'
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/library/content/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/CustomTextProcessing/CustomTextProcessing.html#//apple_ref/doc/uid/TP40009542-CH4-SW65
+  issued: 2016
+  accessed:
+    date-parts:
+    - - 2017
+      - 09
+      - 22
+- id: delegation
+  title: 'Cocoa Core Competencies: Delegation'
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/library/content/documentation/General/Conceptual/DevPedia-CocoaCore/Delegation.html
+  issued: 2015
+  accessed:
+    date-parts:
+    - - 2017
+      - 09
+      - 22
+- id: norman
+  title: The Design of Everyday Things
+  author:
+  - family: Norman
+    given: Don
+  type: book
+  issued: 2013
+  publisher: Basic Books
+  publisher-place: New York, NY
+  edition: Revised and expanded edition
+- id: shapiro
+  title: 'Information Rules: A Strategic Guide to the Network Economy'
+  author:
+  - family: Shapiro
+    given: Carl
+  - family: Varian
+    given: Hal R.
+  type: book
+  issued: 1999
+  publisher: Harvard Business School Press
+  publisher-place: Boston, MA
+- id: choudary
+  title: 'Building the Next WhatsApp or Instagram: The Network Effect Playbook'
+  author:
+  - family: Choudary
+    given: Sangeet Paul 
+  type: webpage
+  URL: https://www.wired.com/insights/2014/03/building-next-whatsapp-instagram-network-effect-playbook/
+  issued: 2014
+  accessed:
+    date-parts:
+    - - 2017
+      - 09
+      - 22
+- id: gangoffour
+  title: 'Design Patterns: Elements of Reusable Object-Oriented Software'
+  author:
+  - family: Gamma
+    given: Erich
+  - family: Helm
+    given: Richard
+  - family: Johnson
+    given: Ralph
+  - family: Vlissides
+    given: John
+  type: book
+  issued: 1994
+  publisher: Addison-Wesley
+  publisher-place: Upper Saddle River, NJ
+- id: bignerd
+  title: 'iOS Programming: The Big Nerd Ranch Guide'
+  author:
+  - family: Keur
+    given: Christian
+  - family: Hillegass
+    given: Aaron
+  type: book
+  issued: 2015
+  publisher: Big Nerd Ranch
+  publisher-place: Atlanta, GA
+  edition: 5th Edition
 ...
