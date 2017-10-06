@@ -1,0 +1,47 @@
+@startuml
+
+skinparam monochrome true
+hide empty members
+hide circle
+
+abstract class UIViewController
+abstract class UITableViewController
+class AppEventViewController
+class Bike
+class BikeRegistry
+class BikeRegistryAPI
+class BluetoothSupport
+class Colour
+class ColourTableViewController
+class EditBikeViewController
+class LocationHelper
+class MainViewController
+class Notifications
+class ProximityMonitor
+class RangingTableViewCell
+class RangingTableViewController
+
+UIViewController <|-- AppEventViewController
+UIViewController <|-- EditBikeViewController
+AppEventViewController <|-- MainViewController
+
+UITableViewController <|-- RangingTableViewController
+UITableViewController <|-- ColourTableViewController
+
+MainViewController --> RangingTableViewController
+MainViewController --> BikeRegistry
+MainViewController --> ProximityMonitor
+MainViewController --> Notifications
+
+RangingTableViewController --* RangingTableViewCell
+
+BikeRegistry --* BikeRegistryAPI
+BikeRegistry --> Bike
+BikeRegistryAPI --> LocationHelper
+
+Bike --> Colour
+ 
+ProximityMonitor --> BluetoothSupport
+
+
+@enduml

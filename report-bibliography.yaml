@@ -51,6 +51,75 @@ references:
     - - 2017
       - 09
       - 22
+- id: keyboards
+  title: 'Human Interface Guidelines: Custom Keyboards'
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/ios/human-interface-guidelines/extensions/custom-keyboards/
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 03
+- id: containerview
+  title: 'Implementing a Container View Controller'
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/library/content/featuredarticles/ViewControllerPGforiPhoneOS/ImplementingaContainerViewController.html
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 03
+- id: regionmonitoring
+  title: "Location and Maps Programming Guide: Region Monitoring and iBeacon"
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/LocationAwarenessPG/RegionMonitoring/RegionMonitoring.html
+  issued: 2016
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 03
+- id: uipickerview
+  title: UIPickerView
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/documentation/uikit/uipickerview
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 06
+- id: beaconzoneuuid
+  title: "Choosing UUID, Major, Minor and Eddystone-UID For Beacons"
+  author:
+  - literal: BeaconZone
+  type: webpage
+  URL: https://www.beaconzone.co.uk/choosinguuidmajorminor
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 03
+- id: drobnik
+  title: "Barcodes with iOS: Bringing together the digital and physical worlds"
+  author:
+  - family: Drobnik
+    given: Oliver
+  type: book
+  issued: 2015
+  publisher: Manning Publications
+  publisher-place: Shelter Island, NY
 - id: norman
   title: The Design of Everyday Things
   author:
@@ -85,6 +154,18 @@ references:
     - - 2017
       - 09
       - 22
+- id: appstore
+  title: App Store Review Guidelines
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/app-store/review/guidelines/
+  issued: 2014
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 05
 - id: gangoffour
   title: 'Design Patterns: Elements of Reusable Object-Oriented Software'
   author:
@@ -112,4 +193,14 @@ references:
   publisher: Big Nerd Ranch
   publisher-place: Atlanta, GA
   edition: 5th Edition
+- id: wysocki
+  title: 'Effective Project Management: Traditional, Agile, Extreme'
+  author:
+  - family: Wysocki
+    given: Robert K.
+  type: book
+  issued: 2014
+  publisher: John Wiley & Sons
+  publisher-place: Indianaopolis, IN
+  edition: Seventh edition
 ...
