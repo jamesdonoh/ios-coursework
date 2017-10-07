@@ -10,7 +10,7 @@ default: $(documents)
 		-V mainfont=Constantia \
 		-V colorlinks \
 		--number-sections \
-		--toc \
+		--toc --toc-depth=2 \
 		-s -o $@ $<
 
 clean:

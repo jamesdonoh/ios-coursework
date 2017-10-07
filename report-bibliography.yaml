@@ -264,4 +264,28 @@ references:
     - - 2017
       - 10
       - 07
+- id: appstorereviews
+  title: Average App Store Review Times
+  author:
+  - literal: Shiny Development
+  type: webpage
+  URL: http://appreviewtimes.com/
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 07
+- id: cultofmac
+  title: Apple cuts App Store approval time to just one day 
+  author:
+  - literal: Cult of Mac
+  type: webpage
+  URL: https://www.cultofmac.com/428101/apple-cuts-app-store-approval-time-to-just-one-day/
+  issued: 2016
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 07
 ...
