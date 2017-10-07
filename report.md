@@ -76,25 +76,28 @@ When inputting the beacon minor on the 'Edit Bike' screen, a standard QWERTY key
 
 #### Beacon identifiers
 
+In the Core Location framework, iBeacons are grouped into regions identified by a _proximity UUID_ - a 128-bit value that is intended to identify a certain beacon type or organisation [@regionmonitoring], optionally combined with a _major_ and _minor_ value (16-bit unsigned integers). The framework makes a distinction between 'monitoring' for a beacon regions (which may include many beacons) and 'ranging' for individual beacons within a region once entered, further recommending that 'ranging' is only performed when the app is in the foreground [@ibeacon] for reasons of accuracy.
+
 One usability problem with the current app design arises from Apple's decision to restrict the Core Location framework to monitor 20 regions at one time. According to Apple this is because regions are a limited "shared system resource" [@regionmonitoring], although this contrasts with the Android platform which has no OS-imposed limit on the number of beacon identifiers to be monitored. The 20-region limit restriction is described by one becacon retailer as "a great example of unnecessary complexity invented by great minds" [@beaconzoneuuid].
 
-In a conventional geofencing-type application where the regions are defined based on geographical coordinates, the 20-region limitation can be mitigated by regularly adjusting the list of monitored regions to include only those already-known locations closest to the user's current location [@drobnik], however in _FindMyBike_ the absolute location of each iBeacon is not known in advance.
+In a conventional geofencing-type application where the regions are defined based on geographical coordinates, the 20-region limitation can be mitigated by regularly altering the list of monitored regions to include only those already-known locations closest to the user's current location [@drobnik], however in a beacon-based application like _FindMyBike_ the geographical location of each beacon is not known in advance, making this impossible.
 
-Beacon regions are identified using a _proximity UUID_, a 128-bit value that is intended to identify a certain beacon type or organisation [@regionmonitoring], optionally combined with a _major_ and _minor_ value (16-bit unsigned integers).
+Because of the relative complexity of configuring an iBeacon's identifier, for the greatest user convenience _FindMyBike_ would be able to monitor for any identifier, so that the default values set by beacon manufacturers could be used without the need for reconfiguration. However, Core Location's restriction on the number of regions that can be monitored at once would limit the number of individual missing bikes that could be detected to 20.
 
-Due to the relative complexity of configuring an iBeacon's identifiers, for the greatest user convenience _FindMyBike_ would be able to monitor any beacon identifier, so that the default identifiers that beacons ship with can be used without the need for reconfiguration. However, Core Location's restriction on the number of regions that can be monitored at once would limit the number of missing bikes that could be sensed to 20.
-
-Consequently, the current implementation of the app defines a single proximity UUID and major pair that is monitored by Core Location, defined by the `Constants` struct as follows:
+Consequently, the current implementation of the app defines a single proximity UUID and major pair that is monitored by the application in the background, defined by the `Constants` struct as follows:
 
     static let applicationUUID = UUID(uuidString: "21EECF71-D5C7-4A00-9B90-27C94B5146EA")!
     static let applicationMajor = UInt16(1)
 
-This is how the process works:
+The following outlines the approach used:
 
-- The iPhone detects that it has entered the application-defined `CLBeaconRegion` (identified using the string `io.github.jamesdonoh.FindMyBike`)
-- iOS sends the `didEnterRegion` notification to the app's instance of `CLLocationManagerDelegate`, which is `ProximityMonitor`
-- The `ProximityMonitor` class begins ranging.
-- TO BE CONCLUDED
+- The user's iPhone detects that it has entered the application-defined `CLBeaconRegion` (defined by the identifiers above and the label `io.github.jamesdonoh.FindMyBike`)
+- iOS sends the `didEnterRegion` notification to the app's instance of `CLLocationManagerDelegate`, which is provided by `ProximityMonitor`
+- `ProximityMonitor` begins ranging for all beacons within the region
+- When individual beacons are ranged, `ProximityMonitor` passes the minor value of each beacon to `BikeRegistry` to determine if any of them represent missing bikes
+- If any minors match, a notification is sent to the user
+
+Note that this implementation disregards Apple's advice to only perform ranging when the app is in the foreground, but given the limited number of regions that can be monitored at one time it is the only practical way to achieve the desired functionality for more than 20 missing bikes.
 
 ## Application design
 
@@ -194,6 +197,12 @@ One targeted way to increase uptake would be to encourage owners of venues which
 
 # Conclusion and further work
 
+## Privacy and ethical implications
+
+Although in its current form _FindMyBike_ does not collect any information that identifies an individual, some users may be reluctant to use an app that requires 'always' access to Location Services on the basis that it appears to constantly track their position, which has privacy implications. Apple's decision to implement iBeacon support as part of Location Services means that the developer of such an app needs to educate users that although it constantly monitors beacon events, it only requests and transmits the user's absolute geographical location when strictly required (to report a missing bike's location). 
+
 ## Wearable implementation
+
+One way of improving the usefulness of the app would be to implement watchOS support. Given the intended users of the app are motorcycle and scooter riders, who may not notice when their phone receives a notitication, a wearable extension of the app would increase the chance of them being aware of the notification and therefore reporting missing bikes. The simplest way to achieve this would be use the Watch Connectivity Framework to send missing bike detection notifications from the iPhone to the watch.
 
 # References

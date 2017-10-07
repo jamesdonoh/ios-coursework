@@ -203,4 +203,16 @@ references:
   publisher: John Wiley & Sons
   publisher-place: Indianaopolis, IN
   edition: Seventh edition
+- id: ibeacon
+  title: 'Getting Started with iBeacon'
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/ibeacon/Getting-Started-with-iBeacon.pdf
+  issued: 2014
+  accessed:
+    date-parts:
+    - - 2017
+      - 07
+      - 29
 ...
