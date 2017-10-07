@@ -47,7 +47,7 @@ The principle of clarity also applies to the choice of what level of detail is a
 
 Conversley, some testers have reported that the text size used for labels and text fields on the _Edit Bike_ scene is too small. This screen uses an explicit font size of 14 points in order to allow the beacon UUID to be displayed in its entirety without truncating the text on a 4.7" screen such as the iPhone 6 or later while maintaining consistency with the other inputs. This was important during the early phases of app development where the UUID was entered manually, a difficult an error-prone process. Even so, on smaller screens (such as the 4" iPhone SE) the UUID is still truncated. As in the final app the UUID is no longer editable, the easiest solution to this problem would be to remove the application UUID from the Edit Bike screen completely.
 
-### Discoverability
+### Discoverability
 
 Another usability factor that was considered was discoverability, meaning the level to which a new user can determine what actions can be performed and how to perform them. The right chevron displayed alongside the 'My Bike' cell is used as a visual hint that the user can tap the cell in order to view more information. The chevron (known as a 'disclosure indicator' in iOS parlance) signals what Norman [@norman] terms an 'affordance', namely the ability to access a more detailed view. Note that while other ways of signalling this affordance are possible, by using the convention of the standard table view disclosure indicator, the user can apply the knowledge they have learned from using other iOS apps. This relates to the stated Apple design principle of 'consistency', specificaly that an app should implement "familiar standards and paradigms by using system-provided interface elements" [@hig].
 
@@ -55,7 +55,7 @@ Another usability factor that was considered was discoverability, meaning the le
 
 The 'Make' and 'Model' text inputs are currently free text fields. As there is a finite set of common motorcycle makes, it would be more convenient to allow the user to choose a make from a pre-populated list. The iOS equivalent of typical 'drop-down' selection boxes found on web pages are 'pickers', which present a scrollable list of values, usually at the bottom of the screen. This may be a suitable way of implementing the selection.
 
-#### Photos and colours
+#### Photos and colours
 
 Early in the development of the _Edit Bike_ scene a method for adding a custom photo to illustrate the user's bike was added through the 'Choose photo' button. This uses the system `UIImagePickerController` to allows the user to choose a photo from their Photo Library, which is then displayed in the `RangingTableViewController`. Although this is a useful feature for an individual user, it creates challenges if these photos need to be shared with other users. These include:
 
@@ -66,7 +66,7 @@ Early in the development of the _Edit Bike_ scene a method for adding a custom p
 
 The last requirement is emphasised in section 1.2 of the App Store Review Guidelines ("User Generated Content") [@appstore], which describes the requirement for filtering and also states that apps featuring user-generated content must include "mechanism to report offensive content and timely responses to concerns". In the light of these additional concerns, it was decided to only store photos locally on the device and not share them with other users. In place of photos, the ability for users to input their bike's colour was added, so that missing bikes can be easily identified without the risks associated with allowing photos.
 
-### Evaluation of usability issues
+### Evaluation of usability issues
 
 #### Keyboards
 
@@ -137,9 +137,9 @@ The original UIKit-provided solution for allowing the user to select items from 
 
 The current controller contains logic for handling item selection (using a 'checkmark' cell accessory) and passing data back to where it was presented from. As an improvement to this approach, controller could be refactored into a general-purpose 'single item picker' controller which could be used as a drop-in replacement for `UIPickerView` with only the data source needing to be customised. This would make it easy to create consistent selection interfaces and promote code reuse, following the object-oriented design goal of finding a design that is "specific to the problem at hand but also general enough to address future problems and requirements" [@gangoffour].
 
-## Development issues
+## Development issues
 
-### Delegation
+### Delegation
 
 The classes provided by the Cocoa frameworks make extensive use of the _delegation_ pattern "in which one object in a program acts on behalf of, or in coordination with, another object" [@delegation]. This is in contrast to a model where behaviour is inherited (and may be overridden) from class to subclass. Inheritance in object-oriented programming creates a tight coupling between a parent class and its subclass and breaks encapsulation, whereas composition enforces a 'black box' approach based on well-defined interfaces, and is therefore usually preferred [@gangoffour].
 
@@ -149,28 +149,47 @@ Although delegation allows complex behaviours to be composed dynamically at run 
 
 Currently _FindMyBike_ requests data about missing bikes from the server only when it starts. As well as meaning that if the user is not online when they first run the app no data will be downloaded, the problem is that if a new bike is reported missing after the app has been started, other users will not detect it as missing till they restart their app. A better solution would be to download data updates periodically while the app is running, either using a `Timer` instance or scheduled background data refresh through the `performFetchWithCompletionHandler` method.
 
-### Prototypes
+### Prototypes
 
-The proposal described that the app development process would use the concept of a 'production prototype' [@wysocki] both to learn the characteristics of the iOS environment and to test out specific areas of functionality. In fact multiple prototypes were developed:
+The proposal described that the app development process would use the concept of a 'production prototype' [@wysocki] both to learn the characteristics of the iOS environment and to test out specific areas of functionality. In fact a series of prototypes were developed:
 
-#### BeaconRanger
+#### BeaconRanger
 
-The first production prototype app developed was called _BeaconRanger_ and was completed around week 5 of the development timeline given in the proposal. It had no bike-related functionality or network capabilities but was focused on ranging iBeacons when the app was in the foreground. Parts of its purpose was to iron out the relatively complex state transitions that occur while location access permission, and to safely handle the user later rescinding that permission and re-granting it. The advantage of this approach was that it helped to be able to test and debug this discrete aspect of functionality behaviour in isolation.
+The first production prototype app developed was called _BeaconRanger_ and was completed around week 5 of the development timeline given in the proposal. It had no bike-related functionality or network capabilities but was focused on ranging iBeacons when the app was in the foreground (see Figure \ref{beaconranger}). Parts of its purpose was to iron out the relatively complex state transitions that occur while requesting location access permission, and to safely handle the user later rescinding that permission and re-granting it. The advantage of this approach was that it helped to be able to test and debug this discrete aspect of functionality behaviour in isolation.
 
-Much of the code that was developed for _BeaconRanger_ was reused as the `ProxmityManager` and `BluetoothSupport` classes in _FindMyBike_.
+![Storyboard scene from BeaconRanger production prototype\label{beaconranger}](beaconranger.png){ width=20% }
+
+Development on _BeaconRanger_ ceased at this point, as it was never intended for release. Much of the code that was developed for this prototype was reused as the `ProxmityManager` and `BluetoothSupport` classes in _FindMyBike_.
 
 #### AboutMyBike
 
-The first version of the app that was built was called `AboutMyBike`. It did not include any iBeacon capabilities but focused on the 
+The next production prototype that was built was called `AboutMyBike`. It did not include any iBeacon monitoring capabilities or server interactions but focused on the user interface, providing a simple form to allow a user to store useful information about their bike including make, model and engine number, along with a photo, as seen in Figure \ref{aboutmybike}.
 
-#### App Store description
+![Edit Bike scene from AboutMyBike production prototype\label{aboutmybike}](aboutmybike.png){ width=20% }
+
+In developing this prototype, one of the objectives was to submit a fully-functional app that complied with App Store guidelines and enable the developer to gain early experience of the App Store review process which would streamline the eventual submission for _FindMyBike_.
+
+_AboutMyBike_ was submitted for App Store review but was rejected after approximately 48h with the following message:
+
+> Guideline 4.2 - Design - Minimum Functionality
+> We found that the usefulness of your app is limited by the minimal amount of content or features it includes. Specifically, your app only includes a singular bike entry.
+
+#### App Store description
 
 [INSERT]
 + privacy?
 
-## Marketing
+## Distribution
 
-### Network effects
+The app was submitted to the App Store with the following description:
+
+[add description]
+
+It was rejected.
+
+### Marketing
+
+#### Network effects
 
 There are two, slightly different features offered by _FindMyBike_:
 
@@ -187,7 +206,7 @@ With this in mind, a plan for developing the app further should include building
 - Store details of the user's breakdown recovery service contact number and membership number (AA, RAC, etc.)
 - Allow the user to record important dates relating to their bike, such as MOT date or insurance expiry date, which could trigger a local notification when the date approaches.
 
-### Promotion
+#### Promotion
 
 Along with conventional types of promotion (such as purchasing advertising such as Google AdWords, or obtaining a paid-for promotional App Store placement, word-of-mouth is likely to be the most effective way of increasing the user base for _FindMyBike_. One way that apps achieve this is through authentic success stories. Tinder used this strategy effectively by staging stunts on college campuses where students claimed to have 'matched' with their professors [CITE] in order to drive downloads. An equivalent for _FindMyBike_ might be to create an artificial scenario where someone locates a missing bike using the app, and then use social media to promote the story.
 
@@ -195,7 +214,23 @@ Although the app itself is free, there is a (small) cost associated with buying 
 
 One targeted way to increase uptake would be to encourage owners of venues which receive a large number of riders as customers (such as biker cafes, garages and petrol stations) to have _FindMyBike_ installed on an iPhone at the venue. This would mean that if a stolen bike is taken to the garage/cafe in question it could be easily detected and the owner notified. Although undoubtedly an effective way of increasing bike recovery rates, the challenge lies in ensuring that the venue staff regularly see notifications delivered to their iPhone and are sufficiently incentivised to report the sightings.
 
-# Conclusion and further work
+# Reflections and suggestions for further work
+
+## App Store review
+
+opinion
+
+## Choice of development language
+
+The Swift language [@swift] was chosen to implement _FindMyBike_ instead of Objecive-C. There were a number of factors in this decision:
+
+- the app was built by a single developer with no existing experience with either Objective-C or Swift and therefore using either one would entail learning a completely new language
+- the app was being created from scratch and therefore there was no need to maintain interoperability or consistency with existing legacy code as in some corporate environments (such as the BBC)
+- Swift's type safety and 
+- the app idea did not entail using any third-party libraries which are only usable within Objective-C projects
+- usage of Swift is increasing and is expected to equal levels of Objective-C development in the next four years [@hillyer]
+
+Despite this, it was noticeable that in some respects the developer experience for Swift lags behind Objective-C. For example, some powerful Xcode features such as automatic refactoring of code are still only available for Objective-C projects. Also the documentation for some application services (such as the new 'unified logging  system' in Foundation [@logging]) is more oriented towards Objective-C and does not provide any detailed Swift examples. This situation is likely to improve over time as Apple's focus moves increasingly from Objective-C to Swift.
 
 ## Privacy and ethical implications
 
@@ -204,5 +239,36 @@ Although in its current form _FindMyBike_ does not collect any information that 
 ## Wearable implementation
 
 One way of improving the usefulness of the app would be to implement watchOS support. Given the intended users of the app are motorcycle and scooter riders, who may not notice when their phone receives a notitication, a wearable extension of the app would increase the chance of them being aware of the notification and therefore reporting missing bikes. The simplest way to achieve this would be use the Watch Connectivity Framework to send missing bike detection notifications from the iPhone to the watch.
+
+# Appendix A: back-end server
+
+As mentioned in the proposal, it is essential for the app to deliver its intended functionality for there to be a server component which centrally stores data about users' bikes, identifies those which are missing and records the geographical location where any missing bikes are detected. Another important role of the server is to send push notifications to the owner's device when their bike is found.
+
+## API implementation
+
+A simple API was implementedbased on [deployd](http://deployd.com), an open source Node.js framework for creating RESTful APIs [cite]. Two significant changes were made to the basic create/retrieve/update/delete (CRUD) functionality provided by deployd:
+
+- a check was added before all requests to ensure that a valid API key was supplied, to protect the API against unauthorised use
+- a custom event handler script was added to send a push notification to the correct APNs server when a new sighting is recorded, using the [apn](https://github.com/node-apn/node-apn) module.
+
+The full source code of the API is attached with this report for reference.
+
+## Data storage
+
+The data for the app is stored in a simple MongoDB instance with two collections, `bikes` and `sightings`. MongoDB is a schema-less database [cite].
+
+[add schema]
+
+## Hosting
+
+The API is hosted using [Heroku](https://devcenter.heroku.com/) and the MongoDB instances using [MLab](https://mlab.com), both of which offer free hosting for low-volume applications.
+
+## Environments
+
+Apple Push Notifications (APNs) supports two environments, development (aka sandbox) and production. The device token obtained by an app when it registers for notifications is specific to which APNs environment is being used by the app, which is determined by the `aps-environment` value in the entitlements file. Processes wishing to deliver push notifications determine which APNs server to use dependent on the environment the device token was obtained for [@apns].
+
+For this reason it is necessary to provide multiple back-end multiple environments, each with a corresponding API server and database.
+
+[add diagram]
 
 # References

@@ -215,4 +215,53 @@ references:
     - - 2017
       - 07
       - 29
+- id: apns
+  title: Communicating with APNs
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/CommunicatingwithAPNs.html
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 07
+- id: swift
+  title: The Swift Programming Language
+  author:
+  - literal: Apple
+  type: book
+  URL: https://itunes.apple.com/in/book/the-swift-programming-language-swift-3-1/id881256329
+  issued: 2014
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 07
+- id: hillyer
+  title: The Swift Programming Language
+  author:
+  - family: Hillyer
+    given: Nathan
+  type: webpage
+  URL: https://savvyapps.com/blog/ultimate-guide-choosing-objective-c-or-swift
+  issued: 2016
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 07
+- id: logging
+  title: About the Logging System
+  author:
+  - literal: Apple
+  type: webpage
+  URL: https://developer.apple.com/documentation/os/logging
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 07
 ...
