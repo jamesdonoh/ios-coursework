@@ -140,6 +140,25 @@ The classes provided by the Cocoa frameworks make extensive use of the _delegati
 
 Although delegation allows complex behaviours to be composed dynamically at run time, one price (as Gamma et. al highlight, p.21) is that it make code harder to understand. This is evidenced in the app in the relationship between `MainViewController`, `RangingTableViewController` and `EditBikeController`. Since these classes only maintain a weak reference to an instance of the user's bike, for it to be persisted it must be passed "up" through two levels of composition to the `BikeRegistry` class, via the `BikeChangedDelegate` protocol. If the app evolved to include a large number of additional controllers this approach could become excessively complex.
 
+## Serialisation 
+
+In the currently implementation, the `Bike` class supports two forms of serialisation:
+
+- to an iOS-specific binary property list format, using the `NSCoding` protocol by implementing an `encode(with:)` method and a failable convenience initialiser `init?(coder:)`
+- to a JSON-based representation suitable for transmission via the API, via an `asJson` computed property and associated initialiser `init(json:)`
+
+The first format is used to store data about the user's own bike along with its photo to a local file, so that it can be redisplayed when the user quits and later restarts the app. However it is less suitable for transmission to an RESTful API, which typically use XML or JSON representations. For API interactions there is no requirement to transmit binary photo data and therefore a JSON format was used, for example:
+
+    {
+        "make": "Triumph",
+        "model": "Speed Triple R",
+        "beaconMinor": 2,
+        "missing": true,
+        "colour": "red"
+    }
+
+Note that the next version of Swift (version 4) includes support a new `Codable` protocol which is likely to reduce the burden of the developer in manually implementing JSON serialisation.
+
 ## Data updates
 
 Currently _FindMyBike_ requests data about missing bikes from the server only when it starts. As well as meaning that if the user is not online when they first run the app no data will be downloaded, the problem is that if a new bike is reported missing after the app has been started, other users will not detect it as missing till they restart their app. A better solution would be to download data updates periodically while the app is running, either using a `Timer` instance or scheduled background data refresh through the `performFetchWithCompletionHandler` method.
@@ -185,13 +204,15 @@ The finished app _FindMyBike_ was submitted to the App Store on 1 Oct with the f
 
 [add description]
 
+Given that properly testing all of the functionality of the app requires multiple iPhones and suitably-configured iBeacons, a video of the 'missing bike detection' user journey was recorded and attached to the submission. The video is included with this report.
+
 It was initially rejected after approximately 21 hours with the following message:
 
 > background modes r shit
 
 Following this feedback, the `UIBackgroundModes` key was removed from the `Info.plist` file and the app resubmitted on 3 Oct (build number 3). After approximately 15 hours it was accepted and placed into the 'Ready for Sale' state.
 
-It is now available on the App Store.
+It is now available on the App Store [link?]
 
 ## Marketing
 
@@ -255,7 +276,7 @@ The App Store Review Guidelines state that apps "that collect user or usage data
 
 ## Consumer expectations and the Internet of Things
 
-The arrival of iBeacons in 2014 coincided with the first discussions of the so-called Internet of Things and the first wave of connected vehicles and household appliances. It is clear from experiences with the initial ranging prototype _BeaconRanger_ that the 'proximity' measurement reported for iBeacons is useful more as a 'hint' than a reliable way of representing distances. Fortunately for _FindMyBike_ the fact that a beacon has been detected _at all_ is sufficient to notify the user that they are near a missing bike, however it is doubtful whether app developers expecting to use the beacon 'proximity' to direct or orient the user will be satisfied.
+The arrival of iBeacons in 2014 coincided with the first discussions of the so-called Internet of Things and the first wave of connected vehicles and household appliances. It is clear from experiences with the initial ranging prototype _BeaconRanger_ that the 'proximity' measurement reported for iBeacons is useful more as a 'hint' than a reliable way of representing distances. Fortunately for _FindMyBike_ the fact that a beacon has been detected _at all_ is sufficient to notify the user that they are near a missing bike, however it is doubtful whether app developers expecting to use the beacon 'proximity' to direct or orient the user will be able to make satisfactory use of this value.
 
 # Appendix A: back-end server
 
@@ -284,8 +305,19 @@ The API is hosted using [Heroku](https://devcenter.heroku.com/) and the MongoDB 
 
 Apple Push Notifications (APNs) supports two environments, development (aka sandbox) and production. The device token obtained by an app when it registers for notifications is specific to which APNs environment is being used by the app, which is determined by the `aps-environment` value in the entitlements file. Processes wishing to deliver push notifications determine which APNs server to use dependent on the environment the device token was obtained for [@apns].
 
-For this reason it is necessary to provide multiple back-end multiple environments, each with a corresponding API server and database.
+For this reason it is necessary to provide multiple back-end multiple environments, each with a corresponding API server and database, see Figure \ref{api}.
 
-[add diagram]
+![High-level overview of API and APNs interactions\label{api}](api.pdf){ width=50% }
+
+Table \ref{environments} summarises the environment configuration.
+
+----------------------------------------------------------------------------------------------
+aps-environment  API server                  MongoDB instance   APNs server
+---------------  --------------------------  -----------------  ------------------------------
+development      murmuring-brushlands-57895  ds147974.mlab.com  api.development.push.apple.com
+production       ancient-headland-59821      ds159024.mlab.com  api.push.apple.com
+----------------------------------------------------------------------------------------------
+
+Table: Environment configuration for FindMyBike\label{environments}
 
 # References
