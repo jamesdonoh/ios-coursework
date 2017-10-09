@@ -288,4 +288,38 @@ references:
     - - 2017
       - 10
       - 07
+- id: wwdc2010
+  title: "WWDC 2010: Steve Jobs on the App Store"
+  author:
+  - family: Callaghan
+    given: Beth
+  type: webpage
+  URL: http://allthingsd.com/20100607/wwdc-2010-steve-jobs-on-the-app-store/
+  issued: 2010
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 08
+- id: techcrunch
+  title: How to grow your app
+  author:
+  - literal: TechCrunch
+  type: webpage
+  URL: https://techcrunch.com/2016/12/26/how-to-grow-your-app/
+  issued: 2016
+  accessed:
+    date-parts:
+    - - 2017
+      - 10
+      - 08
+- id: restful
+  title: RESTful Web Clients
+  author:
+  - family: Amundsen
+    given: Mike
+  type: book
+  issued: 2017
+  publisher: O'Reilly
+  publisher-place: Sebastopol, CA
 ...
